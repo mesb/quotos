@@ -1,0 +1,55 @@
+/*
+Css styles for the Quotos project
+
+*/
+
+* {
+  border-radius: 0 !important;
+  font-size: 11px;
+}
+body {
+ // font-family: 'Dancing Script', cursive;
+ // font-family: 'Bad Script', cursive;
+  font-family: 'Kalam', cursive;
+  padding-top: 20px;
+}
+
+
+#QquoteForm {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#QquoteText {
+  color: #4A0000;
+}
+
+#QquotesPane {
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 10px;
+}
+
+.Qauthor {
+  margin-left: 0;
+  font-weight: bold;
+}
+
+.Qsubmitter {
+  margin-left: 0;
+}
+
+.QquoteProper {
+
+}
+
+#QtoggleQuote {
+  cursor: pointer;
+  cursor: hand;
+}
+
+#QtoggleQuote:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,49 @@
+{{define "content"}}
+<article>
+  <section id="QnewQuote" class="container">
+    <h5 id="QtoggleQuote"> Toggle Quote Form </h5>
+    <form>
+      <section id="QquoteForm">
+        <div class="row form-group">
+
+          <div class="col-md-12 col-sm-12 col-xs-18">
+
+            <textarea name="QquoteText" class="form-control" rows="3"
+                      placeholder="Got a quote you will love to contribute or a piece of text from a book, webpage, or anything interesting? Please leave it here for us all..."></textarea>
+
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-md-12 col-sm-12 col-xs-18">
+            <div class="form-inline">
+              <input class="form-control" name="Qauthor" type="text" placeholder="Author of the Quote" />
+
+              <input class="form-control" name="Qsubmitter" type="text" placeholder="And your name"/>
+
+
+              <button class="btn btn-default" type="submit" value="Add"> Add Snippet</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </form>
+  </section>
+
+  <section id="QquotesPane" class="container">
+    <h2> Archive </h2>
+    <input style="height: 30px; width: 300px" type="text" placeholder="Search Archive" class="form-control">
+    <blockquote class="QquoteProper block">
+      <div>
+        <div class="Qauthor">Lao Tzu </div>
+        <div class="Qsubmitter">Submitted by mesb </div>
+      </div>
+      <p class="Qbody">
+        Whether you go up the ladder or down the ladder, your position is
+        shaky
+      </p>
+    </blockquote>
+
+  </section>
+</article>
+{{end}}
