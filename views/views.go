@@ -22,7 +22,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	data := struct {
 		Title string
 	}{
-		"Kwata TV: Welcome",
+		"Quotos",
 	}
 
 	iTmpl := templates["index"]
