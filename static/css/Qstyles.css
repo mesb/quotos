@@ -5,11 +5,11 @@ Css styles for the Quotos project
 
 * {
   border-radius: 0 !important;
-  font-size: 11px;
+  font-size: 16px;
 }
 body {
- // font-family: 'Dancing Script', cursive;
- // font-family: 'Bad Script', cursive;
+  // font-family: 'Dancing Script', cursive;
+  // font-family: 'Bad Script', cursive;
   font-family: 'Kalam', cursive;
   padding-top: 20px;
 }
@@ -26,10 +26,9 @@ body {
 }
 
 #QquotesPane {
-  width: 65%;
+  width: 70%;
   margin-left: auto;
   margin-right: auto;
-  font-size: 10px;
 }
 
 .Qauthor {
@@ -39,6 +38,7 @@ body {
 
 .Qsubmitter {
   margin-left: 0;
+  font-size: 10px;
 }
 
 .QquoteProper {
@@ -52,4 +52,9 @@ body {
 
 #QtoggleQuote:hover {
   text-decoration: underline;
+}
+
+.Qbody {
+  padding-bottom: 15px;
+  border-bottom: 1px solid silver;
 }

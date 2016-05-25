@@ -30,17 +30,19 @@
     </form>
   </section>
 
-  <section id="QquotesPane" class="container">
+  <section id="QquotesPane" class="container" ng-app="quotos" ng-controller="QuotesCtrl">
     <h2> Archive </h2>
-    <input style="height: 30px; width: 300px" type="text" placeholder="Search Archive" class="form-control">
-    <blockquote class="QquoteProper block">
+    <input ng-model="s" style="height: 30px; width: 300px; margin-bottom: 5px;" type="text" placeholder="Search Archive" class="form-control">
+    <blockquote class="QquoteProper block" ng-repeat="quote in quotes | filter:
+    s">
       <div>
-        <div class="Qauthor">Lao Tzu </div>
-        <div class="Qsubmitter">Submitted by mesb </div>
+        <div><span class="Qauthor"> {$quote.author $} </span>
+    :: <span class="Qsubmitter">submitted by {$
+          quote.submitter $} </span> </div>
+
       </div>
       <p class="Qbody">
-        Whether you go up the ladder or down the ladder, your position is
-        shaky
+        {$ quote.body $}
       </p>
     </blockquote>
 

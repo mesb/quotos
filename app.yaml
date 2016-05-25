@@ -14,5 +14,9 @@ handlers:
 - url: /js
   static_dir: static/js
 
+- url: /quotes
+  static_dir: static/json
+  mime_type: application/json
+
 - url: /.*
   script: _go_app
