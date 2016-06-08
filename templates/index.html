@@ -1,14 +1,14 @@
 {{define "content"}}
-<article>
+<article ng-app="quotosApp" ng-controller="QuotesController">
   <section id="QnewQuote" class="container">
     <h5 id="QtoggleQuote"> Toggle Quote Form </h5>
-    <form>
+    <form method="post" ng-submit="postSnippet()">
       <section id="QquoteForm">
         <div class="row form-group">
 
           <div class="col-md-12 col-sm-12 col-xs-18">
 
-            <textarea name="QquoteText" class="form-control" rows="3"
+            <textarea ng-model="QUOTE.body" name="QquoteText" class="form-control" rows="3"
                       placeholder="Got a quote you will love to contribute or a piece of text from a book, webpage, or anything interesting? Please leave it here for us all..."></textarea>
 
           </div>
@@ -17,9 +17,9 @@
         <div class="row form-group">
           <div class="col-md-12 col-sm-12 col-xs-18">
             <div class="form-inline">
-              <input class="form-control" name="Qauthor" type="text" placeholder="Author of the Quote" />
+              <input class="form-control" ng-model="QUOTE.author" name="Qauthor" type="text" placeholder="Author of the Quote" />
 
-              <input class="form-control" name="Qsubmitter" type="text" placeholder="And your name"/>
+              <input class="form-control" ng-model="QUOTE.submitter" name="Qsubmitter" type="text" placeholder="And your name"/>
 
 
               <button class="btn btn-default" type="submit" value="Add"> Add Snippet</button>
@@ -30,11 +30,13 @@
     </form>
   </section>
 
-  <section id="QquotesPane" class="container" ng-app="quotos" ng-controller="QuotesCtrl">
+  <section id="QquotesPane" class="container">
+    {$ QUOTE $}
     <h2> Archive </h2>
-    <input ng-model="s" style="height: 30px; width: 300px; margin-bottom: 5px;" type="text" placeholder="Search Archive" class="form-control">
+    <input ng-model="s" style="height: 50px; width: 300px; margin-bottom: 5px;" type="text" placeholder="Search Archive" class="form-control">
     <blockquote class="QquoteProper block" ng-repeat="quote in quotes | filter:
     s">
+
       <div>
         <div><span class="Qauthor"> {$quote.author $} </span>
     :: <span class="Qsubmitter">submitted by {$

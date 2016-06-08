@@ -9,4 +9,6 @@ import (
 
 func init() {
 	http.HandleFunc("/", views.IndexHandler)
+	http.HandleFunc("/snippet", views.SnippetHandler)
+
 }

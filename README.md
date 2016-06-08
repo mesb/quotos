@@ -12,3 +12,14 @@ More inspiration is needed for that than to visit a webpage or webapp and add a 
 
 Also, making it a webapp exposes it to others to contribute too. More awareness
 will be created and there will be some sort of sharing and discovery...
+
+
+## How to Install
+Quotos in built in go, html, css and js
+
+A running version is hosted on google appengine:
+http://quotos-1322.appspot.com/
+
+To get a local copy:
+
+1. Install the go runtime for google appengine:
