@@ -2,6 +2,8 @@
 package models
 
 import (
+	"appengine"
+	"appengine/datastore"
 	"fmt"
 	"strings"
 	"time"
@@ -66,21 +68,20 @@ type Quote struct {
 	Flagged       bool
 }
 
-
-func NewQuote(q QuoteAux) *Quote{
+func NewQuote(q QuoteAux) *Quote {
 	return &Quote{
-		Body: q.GetBody(),
-		Submitter: q.GetSubmitter(),
-		Author: q.GetAuthor(),
+		Body:          q.GetBody(),
+		Submitter:     q.GetSubmitter(),
+		Author:        q.GetAuthor(),
 		SubmittedTime: time.Now(),
-		Flagged : false,
+		Flagged:       false,
 	}
 
 }
 
 // returns a string representation of a quote aux  object
 func (q QuoteAux) String() string {
-	return fmt.Sprintf("{body: %s, author: %s, submitter: %s}", q.GetBody(),q.GetAuthor(), q.GetSubmitter())
+	return fmt.Sprintf("{body: %s, author: %s, submitter: %s}", q.GetBody(), q.GetAuthor(), q.GetSubmitter())
 }
 
 // getters
@@ -134,4 +135,16 @@ func (q QuoteAux) Validate() map[string]string {
 	}
 
 	return result
+}
+
+func LoadQuotes(ctx appengine.Context) []QuoteAux {
+	var quotes []QuoteAux
+	q := datastore.NewQuery("Quote").Project("Author", "Body", "Submitter")
+
+	if _, err := q.GetAll(ctx, &quotes); err != nil {
+		panic(err)
+	}
+
+	return quotes
+
 }

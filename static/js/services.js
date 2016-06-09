@@ -14,7 +14,7 @@ quotosApp.factory('QuotesService', function($http){
     quotesFactory= {};
 
     // link to the quotes api url
-    var quotes_url= '/quotes/quote.json';
+    var quotes_url= '/list';
     var post_url= '/snippet';
 
     // service that returns quotes from api
@@ -29,7 +29,7 @@ quotosApp.factory('QuotesService', function($http){
     return quotesFactory;
 });
 
-quotosApp.controller('QuotesController', function($scope, $interval, QuotesService) {
+quotosApp.controller('QuotesController', function($scope, $timeout, $interval, QuotesService) {
 
 
     $scope.QUOTE = {
@@ -47,9 +47,22 @@ quotosApp.controller('QuotesController', function($scope, $interval, QuotesServi
             .then(function(response){
                 console.log(response.data);
                 $scope.quotes.unshift($scope.QUOTE);
+                $scope.msgPane= response.data.Body.success;
+
+                $timeout(function() {
+                    $scope.msgPane= "";
+                }, 5000);
+
                 $scope.clearQUOTE();
             }, function(err){
-                console.log(err);
+                console.log(err.data.Body);
+                var dat= err.data.Body;
+                var txt= " ";
+
+                for (var prop in dat) {
+                    txt += dat[prop] + "; ";
+                }
+                $scope.msgPane= txt;
             });
 
     };
@@ -79,7 +92,8 @@ quotosApp.controller('QuotesController', function($scope, $interval, QuotesServi
 
     promise
         .then(function(response){
-            $scope.quotes= response.data.quotes;
+
+            $scope.quotes= response.data;
         });
 
 });

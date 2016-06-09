@@ -37,6 +37,22 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func ListQuotes(w http.ResponseWriter, r *http.Request) {
+	// set response headers and return response
+	w.Header().Set("Content-Type", "application/json")
+
+	appengineContext := appengine.NewContext(r)
+	q := models.LoadQuotes(appengineContext)
+
+	lquotes, err := json.Marshal(q)
+
+	if err != nil {
+		panic(err)
+	}
+
+	w.Write(lquotes)
+}
+
 func SnippetHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		http.Redirect(w, r, "/", http.StatusOK)
@@ -45,13 +61,12 @@ func SnippetHandler(w http.ResponseWriter, r *http.Request) {
 
 	appengineContext := appengine.NewContext(r)
 	var Q models.QuoteAux
+	var status int
 
 	// set response headers and return response
 	w.Header().Set("Content-Type", "application/json")
 
 	defer r.Body.Close()
-
-
 
 	body, err := ioutil.ReadAll(r.Body)
 
@@ -72,9 +87,22 @@ func SnippetHandler(w http.ResponseWriter, r *http.Request) {
 	if len(result) == 0 {
 		msg.SetType("success")
 		msg.AddText(msg.GetType(), "Text successfully added!")
+
+		// create new quote and save to database
+		newQuote := models.NewQuote(Q)
+
+		key := datastore.NewIncompleteKey(appengineContext, "Quote", nil)
+
+		if _, err := datastore.Put(appengineContext, key, newQuote); err != nil {
+			panic(err)
+		}
+
+		status= http.StatusOK
+
 	} else {
 		msg.SetType("error")
 		msg.AddTextMap(result)
+		status= http.StatusBadRequest
 	}
 
 	resp, err := json.Marshal(msg)
@@ -83,16 +111,8 @@ func SnippetHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// create new quote and save to database
-	newQuote := models.NewQuote(Q)
-
-	key := datastore.NewIncompleteKey(appengineContext, "Quote", nil)
-
-	if _, err := datastore.Put(appengineContext, key, newQuote); err != nil {
-		panic(err)
-	}
-
 	//appengineContext.Infof("%v", newQuote)
 
+	w.WriteHeader(status)
 	w.Write(resp)
 }
