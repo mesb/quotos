@@ -53,6 +53,7 @@ func ListQuotes(w http.ResponseWriter, r *http.Request) {
 	w.Write(lquotes)
 }
 
+// request handler for posting quote to database
 func SnippetHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		http.Redirect(w, r, "/", http.StatusOK)
@@ -97,12 +98,12 @@ func SnippetHandler(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 
-		status= http.StatusOK
+		status = http.StatusOK
 
 	} else {
 		msg.SetType("error")
 		msg.AddTextMap(result)
-		status= http.StatusBadRequest
+		status = http.StatusBadRequest
 	}
 
 	resp, err := json.Marshal(msg)

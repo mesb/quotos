@@ -55,6 +55,10 @@ body {
 }
 
 .Qbody {
+  padding-top: 0;
+  margin: 0 !important;
+  white-space:pre-line;
   padding-bottom: 15px;
   border-bottom: 1px solid silver;
+  display: block;
 }
